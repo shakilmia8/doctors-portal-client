@@ -14,7 +14,7 @@ const MakeAdmin = () => {
     const handleAddAdmin = e => {
         e.preventDefault();
         const user = { email };
-        fetch('http://localhost:5000/users/admin', {
+        fetch('https://cryptic-lowlands-15291.herokuapp.com/users/admin', {
             method: 'PUT',
             headers: {
                 'authorization': `Bearer ${token}`,

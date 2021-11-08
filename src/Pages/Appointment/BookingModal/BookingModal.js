@@ -40,7 +40,7 @@ const BookingModal = ({ openModal, handleModalClose, booking, date, setBookingSu
             serviceName: name,
             date: date.toLocaleDateString()
         };
-        fetch('http://localhost:5000/appointments', {
+        fetch('https://cryptic-lowlands-15291.herokuapp.com/appointments', {
             method: 'POST',
             headers: {
                 'content-type': 'application/json'
