@@ -10,7 +10,6 @@ import Paper from '@mui/material/Paper';
 
 const Appointments = ({ date }) => {
     const { user, token } = useAuth();
-    console.log(user);
     const [appointments, setAppointments] = useState([]);
 
     useEffect(() => {
