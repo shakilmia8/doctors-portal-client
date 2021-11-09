@@ -8,14 +8,13 @@ import TableHead from '@mui/material/TableHead';
 import TableRow from '@mui/material/TableRow';
 import Paper from '@mui/material/Paper';
 
-const Appointments = ({ date }) => {
-    const { user, token } = useAuth();
-    console.log(user);
+const AllAppointments = () => {
+    const { token } = useAuth();
     const [appointments, setAppointments] = useState([]);
 
     useEffect(() => {
-        const newDate = date.toLocaleDateString();
-        const url = `https://cryptic-lowlands-15291.herokuapp.com/appointments?email=${user.email}&date=${newDate}`;
+        const url = `https://cryptic-lowlands-15291.herokuapp.com/appointments`;
+        // const url = `http://localhost:5000/appointments`;
         fetch(url, {
             headers: {
                 'authorization': `Bearer ${token}`
@@ -23,10 +22,10 @@ const Appointments = ({ date }) => {
         })
             .then(res => res.json())
             .then(data => setAppointments(data))
-    }, [date, user.email, token])
+    }, [token])
     return (
         <div>
-            <h2>Appointments: {appointments.length} </h2>
+            <h2>All Appointments: {appointments.length} </h2>
             <TableContainer component={Paper}>
                 <Table aria-label="Appointments table">
                     <TableHead>
@@ -56,4 +55,4 @@ const Appointments = ({ date }) => {
     );
 };
 
-export default Appointments;
+export default AllAppointments;

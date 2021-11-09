@@ -22,6 +22,7 @@ import MakeAdmin from '../MakeAdmin/MakeAdmin';
 import AddDoctor from '../AddDoctor/AddDoctor';
 import useAuth from '../../hooks/useAuth';
 import AdminRoute from '../../Login/AdminRoute/AdminRoute';
+import AllAppointments from '../AllAppointments/AllAppointments';
 
 const drawerWidth = 200;
 
@@ -29,7 +30,7 @@ const drawerWidth = 200;
 
 const Dashboard = () => {
     const [mobileOpen, setMobileOpen] = React.useState(false);
-    const { admin } = useAuth();
+    const { user, admin } = useAuth();
 
     const handleDrawerToggle = () => {
         setMobileOpen(!mobileOpen);
@@ -45,6 +46,7 @@ const Dashboard = () => {
             <Link style={{ color: 'black', textDecoration: 'none' }} to={`${url}`}><Button>Dashboard</Button></Link>
             {
                 admin && <Box>
+                    <Link style={{ color: 'black', textDecoration: 'none' }} to={`${url}/allAppointments`}><Button>All Appointments</Button></Link>
                     <Link style={{ color: 'black', textDecoration: 'none' }} to={`${url}/makeAdmin`}><Button>Make Admin</Button></Link>
                     <Link style={{ color: 'black', textDecoration: 'none' }} to={`${url}/addDoctor`}><Button>Add Doctor</Button></Link>
                 </Box>
@@ -82,6 +84,9 @@ const Dashboard = () => {
                         </IconButton>
                         <Typography variant="h6" noWrap component="div">
                             Doctor's Portal Dashboard
+                        </Typography>
+                        <Typography style={{ float: 'right' }} variant="h6" noWrap component="div">
+                            {user.displayName}
                         </Typography>
                     </Toolbar>
                 </AppBar>
@@ -124,6 +129,9 @@ const Dashboard = () => {
                         <Route exact path={path}>
                             <DashboardHome></DashboardHome>
                         </Route>
+                        <AdminRoute path={`${path}/allAppointments`}>
+                            <AllAppointments key={user._id}></AllAppointments>
+                        </AdminRoute>
                         <AdminRoute path={`${path}/makeAdmin`}>
                             <MakeAdmin></MakeAdmin>
                         </AdminRoute>
